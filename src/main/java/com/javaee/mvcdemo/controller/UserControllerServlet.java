@@ -25,7 +25,12 @@ public class UserControllerServlet extends HttpServlet {
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
 
+                // change later
                 login(username, password);
+            break;
+            case "signup":
+                // add here
+                signup();
             break;
             default:
 
@@ -33,8 +38,13 @@ public class UserControllerServlet extends HttpServlet {
         }
     }
 
+    // login function (trash code)
     private void login(String username, String password) {
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
+    }
+
+    private void signup() {
+        // todo - get variable and add to database using model
     }
 }
