@@ -18,4 +18,11 @@ public class User {
         this.password = password;
         this.email = email;
     }
+
+    public String getUsername() { return this.username; }
+    public String getEmail() { return this.email; }
+    public String getPassword() {
+        // todo -- hash password or not?
+        return "";
+    }
 }
