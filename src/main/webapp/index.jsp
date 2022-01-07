@@ -2,9 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JSP - Hello World</title>
+        <title>Login</title>
     </head>
     <body>
-
+        <h1>Sign In</h1>
+        <form id="form" action="./UserControllerServlet" method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Login</button>
+        </form>
     </body>
 </html>
