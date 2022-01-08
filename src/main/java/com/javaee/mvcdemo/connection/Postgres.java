@@ -9,6 +9,9 @@ public class Postgres {
     private static Connection conn = null;
     public Postgres() {
         try {
+            // use Driver from postgresql
+            Class.forName("org.postgresql.Driver");
+
             // DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<dbname>
             URI dbURI;
             if(System.getenv("DATABASE_URL") != null) {
