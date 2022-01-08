@@ -23,10 +23,8 @@ public class UserControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("doPost");
 
+        String action = request.getParameter("action"); //get action
         String username = null, password = null, email = null;
-
-        //get action
-        String action = request.getParameter("action");
 
         switch (action.toLowerCase()) {
             case "login":
@@ -48,7 +46,7 @@ public class UserControllerServlet extends HttpServlet {
                 }
             break;
             default:
-
+                // none (or have something later)
             break;
         }
     }
@@ -62,9 +60,7 @@ public class UserControllerServlet extends HttpServlet {
     // SIGN UP METHOD
     private boolean signup(@NotNull String username, @NotNull @Min(6) String password,@Email String email) {
         // return false for error message
-        if (UserDA.checkUsernameExist(username)) {
-            return false; // terminate if the username is existed
-        }
+        if (UserDA.checkUsernameExist(username)) return false; // terminate if the username is existed
 
         // add new user - successful (redirect to index.jsp -- login page)
         return UserDA.addUser(new User(username, password, email));
@@ -73,9 +69,7 @@ public class UserControllerServlet extends HttpServlet {
     // USED TO CHECK PARAMETER NAMES FROM REQUEST
     private void getAllParameterName(Enumeration <String> temp) {
         System.out.println("Request parameter name:-");
-        while(temp.hasMoreElements()) {
-            System.out.println("\t" + temp.nextElement());
-        }
+        while(temp.hasMoreElements()) System.out.println("\t" + temp.nextElement());
         System.out.println();
     }
 }
