@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Console;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @WebServlet(name = "UserControllerServlet", value = "/UserControllerServlet")
 public class UserControllerServlet extends HttpServlet {
@@ -64,5 +65,14 @@ public class UserControllerServlet extends HttpServlet {
 
         // add new user
         UserDA.addUser(new User(username, password, email));
+    }
+
+    // used to check request parameter
+    private void getAllParameterName(Enumeration <String> temp) {
+        System.out.println("Request parameter name:-");
+        while(temp.hasMoreElements()) {
+            System.out.println("\t" + temp.nextElement());
+        }
+        System.out.println();
     }
 }
