@@ -12,9 +12,7 @@ public abstract class UserDA {
     public static boolean addUser(User user) {
         String sql = "INSERT INTO users (username,password,email) VALUES (?,?,?)";
         try {
-            Connection conn = Postgres.getConnection(); // get connection
-
-            PreparedStatement prepStmt = conn.prepareStatement(sql); // prepare statement
+            PreparedStatement prepStmt = Postgres.getConnection().prepareStatement(sql); // get connection and prepare statement
 
             // set string parameter
             prepStmt.setString(1, user.getUsername());
@@ -30,8 +28,20 @@ public abstract class UserDA {
     }
 
     // check username if exist in database
-    public static boolean checkUsername(@NotNull  String username) {
-        // todo - add sql to check later
-        return true;
+    public static boolean checkUsernameExist(@NotNull  String username) {
+        String sql = "SELECT ID FROM users WHERE username=?";
+        boolean result = false;
+
+        try {
+            PreparedStatement prepStmt = Postgres.getConnection().prepareStatement(sql);
+            prepStmt.setString(1, username);
+
+            result = prepStmt.executeQuery().next();
+        } catch(SQLException err) {
+            err.printStackTrace();
+        }
+
+        Postgres.closeConnection();
+        return result;
     }
 }
