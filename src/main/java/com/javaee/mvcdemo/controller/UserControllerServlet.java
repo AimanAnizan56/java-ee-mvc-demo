@@ -50,18 +50,22 @@ public class UserControllerServlet extends HttpServlet {
         }
     }
 
-    // login function (trash code)
+    // Login function (trash code)
     private void login(String username, String password) {
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
     }
 
+    // Sign Up function
     private void signup(@NotNull String username, @NotNull @Min(6) String password,@Email String email) {
         // todo - get variable and add to database using model
         System.out.println("Sign Up method");
 
-        // todo - check username if exist (add if)
-        // UserDA.checkUsername(username);
+        // todo - error message
+        if (UserDA.checkUsernameExist(username)) {
+            System.out.println("Use another username!");
+            return; // terminate if the username is existed
+        }
 
         // add new user
         boolean isAdded = UserDA.addUser(new User(username, password, email));
