@@ -21,8 +21,5 @@ public class User {
 
     public String getUsername() { return this.username; }
     public String getEmail() { return this.email; }
-    public String getPassword() {
-        // todo -- hash password or not?
-        return "";
-    }
+    public String getPassword() { return this.password; } // todo -- hash or not??? (might change this later if proceed to hash)
 }
