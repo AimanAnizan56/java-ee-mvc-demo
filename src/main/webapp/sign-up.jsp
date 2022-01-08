@@ -6,7 +6,7 @@
     </head>
     <body>
         <h1>Sign Up</h1>
-        <form action="./UserControllerServlet?action=signup" method="post">
+        <form action="./user/signup" method="post">
             <input type="text" name="username" placeholder="Username">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">

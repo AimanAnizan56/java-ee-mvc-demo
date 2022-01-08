@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.Enumeration;
 
-@WebServlet(name = "UserControllerServlet", value = "/UserControllerServlet")
+@WebServlet(name = "user", value = "/user/*")
 public class UserControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,18 +23,19 @@ public class UserControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("doPost");
 
-        String action = request.getParameter("action"); //get action
+        // String action = request.getParameter("action"); //get action
+        String action = request.getPathInfo();
         String username = null, password = null, email = null;
 
         switch (action.toLowerCase()) {
-            case "login":
+            case "/login":
                 username = request.getParameter("username");
                 password = request.getParameter("password");
 
                 // todo - change later
                 login(username, password);
             break;
-            case "signup":
+            case "/signup":
                 username = request.getParameter("username");
                 password = request.getParameter("password");
                 email = request.getParameter("email");
