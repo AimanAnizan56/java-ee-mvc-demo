@@ -14,9 +14,11 @@ public class Postgres {
             if(System.getenv("DATABASE_URL") != null) {
                 // use cloud system environment
                 dbURI = new URI(System.getenv("DATABASE_URL"));
+                System.out.println("Connected using DATABASE_URL");
             } else {
                 // local database postgres
-                dbURI = new URI("postgres://postgres:system>@localhost:5432/mvcdemo");
+                dbURI = new URI("postgres://postgres:system@localhost:5432/mvcdemo");
+                System.out.println("Connected using Localhost postgres");
             }
 
             String username = dbURI.getUserInfo().split(":")[0]; // get db username
