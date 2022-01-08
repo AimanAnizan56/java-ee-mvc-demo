@@ -64,7 +64,12 @@ public class UserControllerServlet extends HttpServlet {
         // UserDA.checkUsername(username);
 
         // add new user
-        UserDA.addUser(new User(username, password, email));
+        boolean isAdded = UserDA.addUser(new User(username, password, email));
+
+        // todo -- successful message
+        if(isAdded) System.out.println("New user added");
+        else System.out.println("Cannot add user");
+
     }
 
     // used to check request parameter
