@@ -21,7 +21,7 @@ public class Postgres {
             } else {
                 // local database postgres
                 dbURI = new URI("postgres://postgres:system@localhost:5432/mvcdemo");
-                System.out.println("Connected using Localhost postgres");
+                System.out.println("Connected using localhost postgres");
             }
 
             String username = dbURI.getUserInfo().split(":")[0]; // get db username
@@ -37,20 +37,19 @@ public class Postgres {
     }
 
     public static Connection getConnection() {
-        if(conn == null) {
-            new Postgres();
-        }
+        if(conn == null) new Postgres();
         return conn;
     }
 
-    public static void closeConnection() {
+    public static boolean closeConnection() {
         try {
             if(!conn.isClosed()) {
-                conn.close();
-                conn = null;
+                conn.close(); conn = null;
+                System.out.println("Connection closed");
             }
+            return true;
         } catch (SQLException sqlErr) {
-            sqlErr.printStackTrace();
+            sqlErr.printStackTrace(); return false;
         }
     }
 }
