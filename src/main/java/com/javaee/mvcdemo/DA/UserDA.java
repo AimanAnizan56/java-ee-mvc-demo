@@ -9,8 +9,8 @@ import java.sql.*;
 public abstract class UserDA {
 
     // Add new user
-    public static void addUser(User user) {
-        String sql = "INSERT INTO User (username,password,email) VALUES (?,?,?)";
+    public static boolean addUser(User user) {
+        String sql = "INSERT INTO users (username,password,email) VALUES (?,?,?)";
         try {
             Connection conn = Postgres.getConnection(); // get connection
 
@@ -18,12 +18,14 @@ public abstract class UserDA {
 
             // set string parameter
             prepStmt.setString(1, user.getUsername());
+            prepStmt.setString(2, user.getPassword());
+            prepStmt.setString(3, user.getEmail());
 
-            // todo - ResultSet rs = prepStmt.executeQuery();
+            return prepStmt.executeUpdate() == 1; // return true if row added (1 means 1 row added)
         } catch (SQLException err) {
             err.printStackTrace();
+            return false;
         }
-
     }
 
     // check username if exist in database
