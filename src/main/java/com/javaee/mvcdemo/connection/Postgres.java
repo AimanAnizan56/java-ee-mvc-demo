@@ -31,7 +31,7 @@ public class Postgres {
             String dbURL = "jdbc:postgresql://" + dbURI.getHost() + ":" + dbURI.getPort() + dbURI.getPath();
 
             conn = DriverManager.getConnection(dbURL, username, password);
-            if (conn != null) System.out.println(" Connected!");
+            System.out.println(conn != null ? " Connection establish!" : " Could not establish connection!");
         } catch (Exception err) {
             err.printStackTrace();
         }
