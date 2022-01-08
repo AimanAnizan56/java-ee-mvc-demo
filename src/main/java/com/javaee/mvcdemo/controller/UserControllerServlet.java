@@ -34,7 +34,7 @@ public class UserControllerServlet extends HttpServlet {
                 username = request.getParameter("username");
                 password = request.getParameter("password");
 
-                // change later
+                // todo - change later
                 login(username, password);
             break;
             case "signup":
@@ -42,7 +42,11 @@ public class UserControllerServlet extends HttpServlet {
                 password = request.getParameter("password");
                 email = request.getParameter("email");
 
-                signup(username, password,email);
+                if (signup(username, password,email)) {
+                    // todo - if true, redirect to login page (index.jsp)
+                } else {
+                    // todo - false, message try again! (assume that user put existed username)
+                }
             break;
             default:
 
@@ -50,33 +54,24 @@ public class UserControllerServlet extends HttpServlet {
         }
     }
 
-    // Login function (trash code)
+    // LOGIN METHOD - (trash code)
     private void login(String username, String password) {
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
     }
 
-    // Sign Up function
-    private void signup(@NotNull String username, @NotNull @Min(6) String password,@Email String email) {
-        // todo - get variable and add to database using model
-        System.out.println("Sign Up method");
-
-        // todo - error message
+    // SIGN UP METHOD
+    private boolean signup(@NotNull String username, @NotNull @Min(6) String password,@Email String email) {
+        // return false for error message
         if (UserDA.checkUsernameExist(username)) {
-            System.out.println("Use another username!");
-            return; // terminate if the username is existed
+            return false; // terminate if the username is existed
         }
 
-        // add new user
-        boolean isAdded = UserDA.addUser(new User(username, password, email));
-
-        // todo -- successful message
-        if(isAdded) System.out.println("New user added");
-        else System.out.println("Cannot add user");
-
+        // add new user - successful (redirect to index.jsp -- login page)
+        return UserDA.addUser(new User(username, password, email));
     }
 
-    // used to check request parameter
+    // USED TO CHECK PARAMETER NAMES FROM REQUEST
     private void getAllParameterName(Enumeration <String> temp) {
         System.out.println("Request parameter name:-");
         while(temp.hasMoreElements()) {
