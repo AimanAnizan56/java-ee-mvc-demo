@@ -12,5 +12,12 @@
             <button type="submit">Login</button>
             <a href="./sign-up.jsp">Sign new account</a>
         </form>
+        <%
+            if (request.getAttribute("message") != null) {%>
+                <div style="background: green; color: white;">
+                    ${requestScope.message}
+                </div>
+            <%}
+        %>
     </body>
 </html>

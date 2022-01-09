@@ -42,6 +42,9 @@ public class UserControllerServlet extends HttpServlet {
 
                 if (signup(username, password,email)) {
                     // todo - if true, redirect to login page (index.jsp)
+                    request.setAttribute("message","Register successful, you can now login!");
+                    System.out.println("New user added");
+                    request.getRequestDispatcher("/index.jsp").forward(request,response);
                 } else {
                     // todo - false, message try again! (assume that user put existed username)
                 }
