@@ -19,11 +19,12 @@ public abstract class UserDA {
             prepStmt.setString(2, user.getPassword());
             prepStmt.setString(3, user.getEmail());
 
-            return prepStmt.executeUpdate() == 1 && Postgres.closeConnection(); // return true if row added (1 means 1 row added)
+            return prepStmt.executeUpdate() == 1; // return true if row added (1 means 1 row added)
         } catch (SQLException err) {
             err.printStackTrace();
-            Postgres.closeConnection();
             return false;
+        } finally {
+            Postgres.closeConnection();
         }
     }
 
@@ -39,9 +40,10 @@ public abstract class UserDA {
             result = prepStmt.executeQuery().next();
         } catch(SQLException err) {
             err.printStackTrace();
+        } finally {
+            Postgres.closeConnection();
         }
 
-        Postgres.closeConnection();
         return result;
     }
 }
